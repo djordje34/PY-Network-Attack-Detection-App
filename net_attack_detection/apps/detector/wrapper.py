@@ -8,3 +8,6 @@ class Wrapper:
 
     def getModel(self):
         return self._model
+    
+    def predict(self, data):
+        return self._model.predict(data)
