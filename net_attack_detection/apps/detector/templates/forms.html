@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container mt-5 d-flex flex-column justify-content-center">
+    <form method="post" action="{% url 'process_form' %}">
+      {% csrf_token %}
+      <div class="mb-3 d-flex justify-content-center">
+      <button id="btnsub" type="submit" class="btn btn-danger w-50">Run!</button>
+    </div>
+    </form>
+  </div>
+{% endblock %}

@@ -16,21 +16,20 @@ class PreprocessPipeline:
     @staticmethod
     def getScaler():
         if PreprocessPipeline._scaler_instance is None:
-            PreprocessPipeline._scaler_instance = joblib.load("static/models/scaler.save")  #need to load scaler for outside
+            PreprocessPipeline._scaler_instance = joblib.load("apps/detector/static/models/scaler.save")  #need to load scaler for outside
         return PreprocessPipeline._scaler_instance
     
     
     @classmethod
     def preprocessData(cls, data):
+        
         if isinstance(data, dict):
             data = pd.DataFrame([data])
             
         scaler = cls.getScaler()
         data['IPV4_SRC_ADDR'] = data['IPV4_SRC_ADDR'].apply(cls.transformIP)
         data['IPV4_DST_ADDR'] = data['IPV4_DST_ADDR'].apply(cls.transformIP)
-        print(data)
         data = data.to_numpy()
-        print(data)
         data_transformed = scaler.transform(data)
         return data_transformed
         

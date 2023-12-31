@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div id="root"></div>
+  <div class="container mt-5">
+    <h2>Running the simulation</h2>
+    <iframe src="{% url 'show_form' %}" width="100%" height="500px" style="border: none;"></iframe>
+  </div>
+{% endblock %}
