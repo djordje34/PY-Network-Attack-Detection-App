@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from apps.detector.wrapper import Wrapper
 from apps.detector.preprocess_pipeline import PreprocessPipeline
 from django.views.decorators.csrf import csrf_exempt
+from apps.detector.recommender import Recommender
 # Create your views here.
 
 from django.shortcuts import render
@@ -34,6 +35,23 @@ def predict(request):
             pred_list = pred.tolist()
             return JsonResponse({'prediction': pred_list})
 
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON format in the request body'}, status=400)
+
+    else:
+        return JsonResponse({'error':'Something went wrong'}, status = 405)
+    
+    
+@csrf_exempt
+def diagnose(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+            data = PreprocessPipeline.preprocessDataDiag(data)
+            rec = Recommender()
+            pred = rec.getRecommendations(data)
+            pred_str = PreprocessPipeline.inverseLabelEncoding(pred).tolist()
+            return JsonResponse({'prediction':pred_str})
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON format in the request body'}, status=400)
 

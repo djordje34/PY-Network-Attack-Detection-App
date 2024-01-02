@@ -6,6 +6,7 @@ from sklearn.preprocessing import MinMaxScaler, FunctionTransformer
 
 class PreprocessPipeline:
     _scaler_instance = None
+    _encoder_instance = None
     
     @staticmethod
     def transformIP(ip_address):
@@ -19,6 +20,10 @@ class PreprocessPipeline:
             PreprocessPipeline._scaler_instance = joblib.load("apps/detector/static/models/scaler.save")  #need to load scaler for outside
         return PreprocessPipeline._scaler_instance
     
+    def getEncoder():
+        if PreprocessPipeline._encoder_instance is None:
+            PreprocessPipeline._encoder_instance = joblib.load("apps/detector/static/models/encoder.save")  #need to load scaler for outside
+        return PreprocessPipeline._encoder_instance
     
     @classmethod
     def preprocessData(cls, data):
@@ -32,6 +37,20 @@ class PreprocessPipeline:
         data = data.to_numpy()
         data_transformed = scaler.transform(data)
         return data_transformed
+        
+    @classmethod
+    def preprocessDataDiag(cls, data):
+        if isinstance(data, dict):
+            data = pd.DataFrame([data])
+        scaler = cls.getScaler()
+        print(data)
+        data_transformed = pd.DataFrame(scaler.inverse_transform(data), columns=data.columns, index=data.index)
+        return data_transformed
+        
+    @classmethod 
+    def inverseLabelEncoding(cls,target):
+        encoder = cls.getEncoder()
+        return encoder.inverse_transform(target)
         
 """     TESTING THE PIPELINE :
 test_data = {
