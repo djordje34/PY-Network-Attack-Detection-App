@@ -4,3 +4,4 @@
 *.css linguist-detectable=false
 *.py linguist-detectable=true
 *.sh linguist-detectable=false
+*.bat linguist-detectable=false
