@@ -6,3 +6,4 @@
 *.sh linguist-detectable=false
 *.bat linguist-detectable=false
 *.3 linguist-language=text
+*.ps1 linguist-detectable=false
