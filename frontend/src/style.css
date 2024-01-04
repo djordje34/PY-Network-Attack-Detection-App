@@ -1,0 +1,22 @@
+#root{
+    height: 100vh;
+    width: 100%;
+  }
+  body{
+    background-color: #151515;
+  }
+  .navbar{
+    background-color: #649568 !important;
+  }
+
+
+  .benign {
+    color: #23C833; 
+    font-size: 12px;
+  }
+  
+  .malicious {
+    font-size: 12px;
+    color: #C82333; 
+  }
+

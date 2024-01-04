@@ -1,0 +1,62 @@
+.terminal {
+    padding: 10px;
+    background-color:#151515;
+    min-width: 30%;
+    min-height: 20%;
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+  }
+  
+  .terminal-row {
+    display: table-row;
+    max-width:100%;
+  }
+  
+  .terminal-cell {
+    display: table-cell;
+    padding: 10px;
+    background-color: #151515;
+    border-bottom: 1px solid #333;
+    text-align: center;
+  }
+  .terminal-cell p{
+    color: #649568;
+    padding:0;
+    margin:0;
+  }
+  
+  .benign {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #23C833; 
+  }
+  
+  .malicious {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #C82333; 
+  }
+
+  .table-container{
+    padding-right: 0px !important;
+    min-height: 500px;
+    max-height: 500px; /* Set the desired constant height */
+    min-width:fit-content;
+    overflow-y: auto;
+    overflow-x:hidden;
+  }
+
+  .btngo{
+    background-color: #252525 !important;
+    color:#649568 !important;
+    border: none !important;
+    background-image: linear-gradient(#252525, #252525 50%, Sienna 50%, Sienna) !important;
+    background-size: 100% 200% !important;
+    -webkit-transition: background-position .5s !important;
+    transition: background-position .5s !important;
+  }
+  .btngo:hover{
+    background-position: 0 -100% !important;
+    color:#151515 !important;
+  }

@@ -1,6 +1,6 @@
 document.getElementById('predict-form').addEventListener('submit', async (e) => {
     e.preventDefault();
- 
+    console.log("HEY")
     const ipv4src = document.getElementById('ipv4_src_addr').value;
     const l4srcport = document.getElementById('l4_src_port').value;
     const ipv4dst = document.getElementById('ipv4_dst_addr').value;

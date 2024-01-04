@@ -2,8 +2,138 @@
 
 {% block content %}
   <div id="root"></div>
-  <div class="container mt-5">
-    <h2>Running the simulation</h2>
-    <iframe src="{% url 'show_form' %}" width="100%" height="500px" style="border: none;"></iframe>
+  <div class="container mt-5 d-flex justify-content-center">
+    <div class="p-2">
+    <table class="terminal" id="appendable">
+      <tr class="terminal-row">
+        <td class="terminal-cell">
+          <p>IPV4_SRC_ADDR</p>
+        </td>
+        <td class="terminal-cell">
+          <p>L4_SRC_PORT</p>
+        </td>
+        <td class="terminal-cell">
+          <p>IPV4_DST_ADDR</p>
+        </td>
+        <td class="terminal-cell">
+          <p>L4_DST_PORT</p>
+        </td>
+        <td class="terminal-cell">
+          <p>PROTOCOL</p>
+        </td>
+        <td class="terminal-cell">
+          <p>L7_PROTO</p>
+        </td>
+        <td class="terminal-cell">
+          <p>IN_BYTES</p>
+        </td>
+        <td class="terminal-cell">
+          <p>OUT_BYTES</p>
+        </td>
+        <td class="terminal-cell">
+          <p>IN_PKTS</p>
+        </td>
+        <td class="terminal-cell">
+          <p>OUT_PKTS</p>
+        </td>
+        <td class="terminal-cell">
+          <p>TCP_FLAGS</p>
+        </td>
+        <td class="terminal-cell">
+          <p>FLOW_DURATION_MILLISECONDS</p>
+        </td>
+        <td class="terminal-cell">
+          <p>STATUS</p>
+        </td>
+        <td class="terminal-cell">
+          <p>COMMENT</p>
+        </td>
+      </tr>
+    </table>
   </div>
+    <div class="container mt-5 d-flex flex-column justify-content-center">
+        <button id="btnsub" class="btn btn-danger">Run the simulation!</button>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      $("#btnsub").click(function () {
+        $.ajax({
+          type: "GET",
+          url: "http://127.0.0.1:8000/get_data/",
+          success: function (data) {
+            handleData(data);
+          },
+          error: function (error) {
+            console.error("Error getting data:", error);
+          },
+        });
+      });
+
+      function handleData(data) {
+        $.ajax({
+          type: "POST",
+          url: "http://127.0.0.1:8000/predict/",
+          data: JSON.stringify(data),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (response) {
+            let val = response.prediction;
+            console.log(response.prediction)
+            if(val>=0.5){
+              val = "MALIGN";
+            }
+            else{
+            val = "BENIGN";
+            }
+            updateTable(data,val);
+          },
+          error: function (error) {
+            console.error("Error predicting:", error);
+          },
+        });
+      }
+
+      // Function to handle API response
+      function handleResponse(response) {
+        // Check if prediction is greater than 0.5
+        var status = response.prediction[0][0] > 0.5 ? "MALIGN" : "BENIGN";
+        
+        // Make AJAX request to diagnose endpoint
+        $.ajax({
+          type: "POST",
+          url: "http://127.0.0.1:8000/diagnose/",
+          data: JSON.stringify(response),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (diagnoseResponse) {
+            updateTable(diagnoseResponse, status);
+          },
+          error: function (error) {
+            console.error("Error diagnosing:", error);
+          },
+        });
+      }
+
+      function updateTable(response, status) {
+        // Create a new table row
+        var newRow = $("<tr>").addClass("terminal-row");
+
+        $.each(response, function (key, value) {
+          var newCell = $("<td>").addClass("terminal-cell").append($("<p>").text(value));
+          newRow.append(newCell);
+        });
+        console.log(newRow);
+        // Add the status cell
+        newRow.append($("<td>").addClass("terminal-cell").append($("<p>").text(status)));
+
+        newRow.append($("<td>").addClass("terminal-cell").append($("<p>").text("")));
+
+          $("#appendable").append(newRow);
+      }
+    });
+  </script>
+
 {% endblock %}

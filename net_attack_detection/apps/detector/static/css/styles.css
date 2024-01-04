@@ -1,0 +1,53 @@
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.terminal {
+  padding: 10px;
+  background-color:#151515;
+  min-width: 30%;
+  min-height: 20%;
+  margin-bottom: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.terminal-row {
+  display: table-row;
+}
+
+.terminal-cell {
+  display: table-cell;
+  padding: 10px;
+  background-color: #151515;
+  border-bottom: 1px solid #333;
+  text-align: center;
+}
+.terminal-cell p{
+  color: #b5bd68;
+  padding:0;
+  margin:0;
+}
+
+.content {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.benign {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #23C833; 
+}
+
+.malicious {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #C82333; 
+}

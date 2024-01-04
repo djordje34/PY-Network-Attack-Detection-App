@@ -42,10 +42,12 @@ class PreprocessPipeline:
     def preprocessDataDiag(cls, data):
         if isinstance(data, dict):
             data = pd.DataFrame([data])
-        scaler = cls.getScaler()
-        print(data)
-        data_transformed = pd.DataFrame(scaler.inverse_transform(data), columns=data.columns, index=data.index)
-        return data_transformed
+            
+        data['IPV4_SRC_ADDR'] = data['IPV4_SRC_ADDR'].apply(cls.transformIP)
+        data['IPV4_DST_ADDR'] = data['IPV4_DST_ADDR'].apply(cls.transformIP)
+        #scaler = cls.getScaler()
+        #data_transformed = pd.DataFrame(scaler.inverse_transform(data), columns=data.columns, index=data.index)
+        return data
         
     @classmethod 
     def inverseLabelEncoding(cls,target):
