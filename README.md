@@ -30,7 +30,7 @@ The Network Attack Detection System is a web application designed to analyze net
 ```
 
 ## API Endpoints
-* /get_data/: Retrieve network data.
+* /get_data/: Retrieve one instance of network communication data.
 * /predict/: Make predictions on network data.
 * /diagnose/: Diagnose network data, find the potential attack(s).
 
