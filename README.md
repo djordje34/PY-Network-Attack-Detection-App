@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Network Attack Detection System is a web application designed to analyze network data, predict potential attacks, and diagnose network issues. It consists of a backend API built with Django and a frontend interface developed with React.
+The Network Attack Detection System is a web application designed to analyze network data, predict potential attacks, and diagnose network issues. It consists of a backend API built with Django and a frontend interface developed with React + Bootstrap.
 
 ## Features
 
