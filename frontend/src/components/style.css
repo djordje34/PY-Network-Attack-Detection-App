@@ -41,10 +41,9 @@
   .table-container{
     padding-right: 0px !important;
     min-height: 500px;
-    max-height: 500px; /* Set the desired constant height */
+    /*max-height: 500px; /* Set the desired constant height */
     min-width:fit-content;
-    overflow-y: auto;
-    overflow-x:hidden;
+    overflow-y:visible;
   }
 
   .btngo{

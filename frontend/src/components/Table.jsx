@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Table = ({ labels, data }) => {
   return (

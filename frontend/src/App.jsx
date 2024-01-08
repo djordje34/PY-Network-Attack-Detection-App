@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Table from './components/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import'./style.css';
@@ -7,6 +7,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const App = () => {
+  const btRef = useRef();
   const [labels, setLabels] = useState([]);
   const [data, setData] = useState([]);
 
@@ -17,6 +18,7 @@ const App = () => {
 
   const fetchData = async () => {
     try {
+      for(let i=0;i<(5 + (Math.random() * (10)));i++){
       const response = await fetch("http://127.0.0.1:8000/get_data/");
       const result = await response.json();
       console.log(result);
@@ -70,6 +72,8 @@ const App = () => {
 
       // Write the full result, including the status value and comment value
       setData((prevData) => [...prevData, { ...result, STATUS: status, COMMENT: comment }]);
+      btRef.current.scrollIntoView({behavior: 'smooth'})
+    }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -82,7 +86,10 @@ const App = () => {
           Network Attack Detection
         </a>
       </nav>
+      <div class="scroller">
       <Table labels={labels} data={data} />
+      <div class="flag" ref={btRef} />
+      </div>
       <div className="btnholder mt-5 d-flex justify-content-center">
         <button className="btn btn-danger btngo" onClick={() => fetchData()}>
           Run the simulation!
