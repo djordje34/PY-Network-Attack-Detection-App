@@ -7,3 +7,4 @@
 *.bat linguist-detectable=false
 *.3 linguist-language=text
 *.ps1 linguist-detectable=false
+*.ipynb linguist-language=py
