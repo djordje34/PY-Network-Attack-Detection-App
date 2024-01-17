@@ -5,6 +5,7 @@ import'./style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import logo from './assets/NetDet-nobg.png'
 
 const App = () => {
   const btRef = useRef();
@@ -82,9 +83,13 @@ const App = () => {
   return (
     <div className="d-flex justify-content-center flex-column">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand p-2" href="#">
-          Network Attack Detection
-        </a>
+        <img
+                            src={logo}
+                            width="50"
+                            height="50"
+                            className="d-inline-block align-top m-2 mt-0 mb-0 logo"
+                            alt="logo"
+                        />
       </nav>
       <div class="scroller">
       <Table labels={labels} data={data} />
