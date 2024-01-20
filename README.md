@@ -16,7 +16,7 @@ The Network Attack Detection System is a web application designed to analyze net
 ### Backend
 
 - Django: Web framework for building the API.
-- Machine Learning Framework (TensorFlow, Scikit-learn): Used for network attack prediction.
+- Machine Learning Framework (TensorFlow, Scikit-learn): Used for network attack prediction and analysis.
 
 ### Frontend
 
